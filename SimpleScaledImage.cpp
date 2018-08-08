@@ -2,8 +2,6 @@
 // OpenCV includes
 #include <opencv2/opencv.hpp>
 
-
-
 int main(int argc, char **argv) {
 
 		
@@ -47,6 +45,11 @@ int main(int argc, char **argv) {
 	sprintf(width, "%.2fm", objWidth);
 	sprintf(height, "%.2fm", objHeight);
 
+	cv::line(im1, cv::Point(roi1.x, roi1.y), cv::Point(roi1.x, roi1.y + roi1.height),
+		cv::Scalar(255, 0, 0), 3);
+	cv::line(im1, cv::Point(roi1.x, roi1.y + roi1.height), cv::Point(roi1.x + roi1.width, roi1.y + roi1.height),
+		cv::Scalar(255, 0, 0), 3);
+
 	cv::putText(im1, width, cv::Point2f(roi1.x + roi1.width/4, roi1.y + roi1.height+50),CV_FONT_HERSHEY_SIMPLEX,1,cv::Scalar(255,0,0),2);							
 	cv::putText(im1, height, cv::Point2f(roi1.x - 100, roi1.y+ roi1.height/2), CV_FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(255,0, 0), 2);
 		
@@ -55,9 +58,7 @@ int main(int argc, char **argv) {
 	std::cin >> filename;
 	cv::imshow("Scaled image", im1);
 	cv::imwrite(filename + ".png", im1);	
-	std::cout << "\nImage saved as" << filename + ".png" << std::endl;
-
-	while (cv::waitKey(0) != 27); //spin until esc is pressed
+	std::cout << "\nImage saved as " << filename + ".png" << std::endl;
         
     return 0;
 }
